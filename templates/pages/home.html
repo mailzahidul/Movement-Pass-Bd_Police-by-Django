@@ -1,0 +1,37 @@
+{% extends 'pages/base.html'%} 
+{% load static %}
+
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-4 d-flex justify-content-center" style="margin-top: 70px;">
+            <img src="{% static 'images/covid-protection.png' %}" style="max-width: 60%;" alt="">
+        </div>
+        <div class="col-lg-8" style="margin-top: 120px;">
+            <p class="color-muted fs-6">Greetings! Only in case of emergency, you can use this tool to get permission from the concerned police department by maintaining the hygiene rules in the lockdown.</p>
+            <div class="row d-flex justify-content-center mt-5">
+                <div class="col-md-3">
+                    <a href="" class="btn btn-primary d-block">Register</a>
+                </div>
+                <div class="col-md-1 text-center">
+                    <i class="far fa-arrow-alt-circle-right"></i>
+                </div>
+                <div class="col-md-3">
+                    <a href="" class="btn btn-success d-block">Apply</a>
+                </div>
+                <div class="col-md-1 text-center">
+                    <span class="align-middle span-arrow">
+                        <i class="far fa-arrow-alt-circle-right"></i>
+                    </span>
+                </div>
+                <div class="col-md-3">
+                    <a href="" class="btn btn-info d-block">Collect</a>
+                </div>
+                <div class="col-md-1">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
