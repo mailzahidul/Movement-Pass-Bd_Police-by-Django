@@ -31,10 +31,10 @@
                     <a class="nav-link fw-bold" aria-current="page" href="#">COLLECT</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link fw-bold" href="#">SIGN UP</a>
+                    <a class="nav-link fw-bold" href="{% url 'registration' %}">SIGN UP</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link fw-bold" href="#">LOG IN</a>
+                    <a class="nav-link fw-bold" href="{% url 'login' %}">LOG IN</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link fw-bold" href="#">QUERIES</a>
@@ -53,6 +53,8 @@
 
     <main class="jumborton pt-5" style="background-color: #EDF8FE;">
         <div class="container">
+         
+
             {% block content %}
 
             
@@ -60,6 +62,11 @@
         </div>
     </main>
 
+    <footer class="text-muted footer py-5" style="background-color: #EDF8FE;">
+      <div class="container">
+        <p class="text-center">&copy; Created by Zahidul Islam | By Django version 3.2.5 </p>
+      </div>
+    </footer>
 
 
 

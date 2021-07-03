@@ -1,0 +1,158 @@
+{% extends 'pages/base.html' %}
+
+{% block title %} Register | Movement Pass {% endblock %}
+
+{% block content %}
+<main id="main">
+    <section id="home" class="home" style="margin-top:50px">
+        <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-9">
+
+                {% if messages %}
+                <div class="messages" >
+                    {% for message in messages %}
+                        <div class="alert alert-primary" {% if message.tags %}
+                             class="{{ message.tags }}"{% endif %}>{{ message }}
+                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+
+                <div class="card border-0 shadow-sm">
+                    <h5 class="card-header">Registration Form</h5>
+                    <div class="card-body">
+                        <form class="row" id="register_form" action="{% url 'registration' %}" method="POST"
+                              enctype="multipart/form-data">
+                              {% csrf_token %}                            
+                              <div class="form-group col-md-6 mb-3">
+                                <label for="name" class="mb-2">Your name <span class="text-danger">*</span></label>
+                                <input type="text" value=""
+                                       placeholder="Enter your full name" id="name"
+                                       class="form-control " name="name" required>
+                                </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="name" class="mb-2">Your mobile number<span
+                                            class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">+88</span>
+                                    </div>
+                                    <input type="number" name="phone" value=""
+                                           class="form-control "
+                                           placeholder="015XX-XXX-XXX" aria-label="mobile"
+                                           aria-describedby="basic-addon1" required minlength="11" maxlength="11">
+                                                                    </div>
+                            </div>
+
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="district" class="mb-2">Your District <span class="text-danger">*</span></label>
+                                <select class="district form-control "
+                                name="district"
+                                         required>
+                                    <option> Select District </option>
+                                    {% for d in district %}
+                                    <option >{{ d }}</option>
+                                    {% endfor %}
+                                    </select>
+                            </div>
+
+                                <div class="form-group col-md-6 mb-3">
+                                    <label for="name" class="mb-2">Your Thana name <span class="text-danger">*</span></label>
+                                            <input type="text"
+                                                placeholder="Enter your Thana Name" id="name"
+                                                class="form-control " name="thana" required>
+                                </div>
+
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="gender" class="mb-2">Gender<span
+                                            class="text-danger">*</span></label><br/>
+                                <select class="form-control  " id="id_type"
+                                            name="gender" required>
+                                        <option value="" selected disabled>Select Type</option>
+                                        {% for g in gender %}
+                                        <option>
+                                            {{ g }}
+                                        </option>
+                                        {% endfor %}
+                                </select>
+
+                            </div>
+
+                            
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="dob" class="mb-2">Date of Birth <span
+                                            class="text-warning">(DDMMYY)</span><span
+                                            class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input type="date" class="form-control" name="date_of_birth" id="date_of_birth">
+                                </div>
+                                </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="id_type" class="mb-2">Select your ID type<span
+                                            class="text-danger">*</span></label>
+                                <select class="form-control  " id="id_type"
+                                        name="id_type" required>
+                                    <option value="" selected disabled>Select Type</option>
+                                    {% for idname in id_type %}
+                                    <option>
+                                        {{idname}}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                                                            </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="id_number" class="mb-2">ID number<span
+                                            class="text-danger">*</span></label>
+                                <input type="text" value="" placeholder="XXXXXXXXXXXX"
+                                       class="form-control  " 
+                                       name="id_number" required numeric>
+                            </div>
+
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="name" class="mb-2">Password <span class="text-danger">*</span></label>
+                                <input type="password" value=""
+                                       placeholder="Type Your Password" id="name"
+                                       class="form-control " name="password1" required>
+                            </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="name" class="mb-2"> Confirm Password <span class="text-danger">*</span></label>
+                                <input type="password" value=""
+                                       placeholder="Confirm your Password" id="name"
+                                       class="form-control " name="password2" required>
+                            </div>
+
+                            <div class="form-group col-md-12 mb-3">
+                                <label for="photo" class="mb-2">Your photo</label>
+                                <div class="input-group d-block">
+                                    <div class="input-group-prepend">
+                                        <!-- <span class="input-group-text" id="basic-addon1" style="padding:.200rem .25rem;"></span> -->
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" style="padding: 4px 0.9rem" class="form-control custom-file-input " id="photo" name="photo">
+                                        <label class="custom-file-label" for="customFile">Choose your photo</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary"><i
+                                                class="bi bi-check2"></i> Submit</button>
+                                    <button type="reset" class="btn btn-danger"><i
+                                                class="bi bi-arrow-repeat"></i> Reset                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </section>
+</main>
+{% endblock %}

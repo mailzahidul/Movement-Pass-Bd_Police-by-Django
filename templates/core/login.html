@@ -1,0 +1,64 @@
+{% extends 'pages/base.html' %}
+
+{% block title %} Login | Movement Pass {% endblock %}
+
+{% block content %}
+<main id="main">
+    <section id="home" class="home" style="margin-top:50px">
+    <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+                {% if messages %}
+            <div class="messages" >
+                {% for message in messages %}
+                    <div class="alert alert-primary" {% if message.tags %}
+                        class="{{ message.tags }}"{% endif %}>{{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="card">
+                <img src="https://movementpass.police.gov.bd/assets/img/bd-police.png" class="mt-2 card-img-top mx-auto d-block" style="height: 100px; width: 100px; object-fit: contain; object-position: top" alt="logo">
+                    <h3 class="text-center mt-1">Log In</h3>
+                <div class="card-body" style="padding-top:0px;">
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <div class="form-group mb-3">
+                            <label for="mobile" class="mb-2">Mobile Number</label>
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">+88</span>
+                                </div>
+                                <input type="text" name="phone" value=""
+                                       class="form-control "
+                                       placeholder="015XX-XXX-XXX" required autocomplete="mobile" autofocus aria-label="mobile"
+                                       aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="mb-2">Date Of Birth </label> <span class="text-warning">(DDMMYY)</span>
+                                <input id="password"  placeholder="" type="password" class="form-control " name="password" required autocomplete="off">
+                        </div>
+                        <p class="small text-muted">If the date is 01-02-1994 then write 01021994</p>
+
+                        <div class="form-group mt-3">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary w-100">Log In</button>
+                                <a class="mt-2 btn btn-link" href="{% url 'registration' %}"> If you don't have an account please register</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </section>
+</main>
+{% endblock %}

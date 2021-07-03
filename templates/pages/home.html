@@ -6,6 +6,13 @@
 
 {% block content %}
     <div class="row">
+        
+        {% if messages %}
+            {% for message in messages %}
+                <div{% if message.tags %} class=" alert {{ message.tags }} my-5"{% endif %} > {{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
         <div class="col-lg-4 d-flex justify-content-center" style="margin-top: 70px;">
             <img src="{% static 'images/covid-protection.png' %}" style="max-width: 60%;" alt="">
         </div>
@@ -16,13 +23,15 @@
                     <a href="" class="btn btn-primary d-block">Register</a>
                 </div>
                 <div class="col-md-1 text-center">
-                    <i class="far fa-arrow-alt-circle-right"></i>
+                    <span class="align-middle span-arrow mt-2">
+                        <i class="far fa-arrow-alt-circle-right"></i>
+                    </span>                
                 </div>
                 <div class="col-md-3">
                     <a href="" class="btn btn-success d-block">Apply</a>
                 </div>
                 <div class="col-md-1 text-center">
-                    <span class="align-middle span-arrow">
+                    <span class="align-middle span-arrow mt-2">
                         <i class="far fa-arrow-alt-circle-right"></i>
                     </span>
                 </div>
