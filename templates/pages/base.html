@@ -33,9 +33,15 @@
                   <li class="nav-item">
                     <a class="nav-link fw-bold" href="{% url 'registration' %}">SIGN UP</a>
                   </li>
+                  {% if request.user.is_authenticated %}
+                  <li class="nav-item">
+                    <a class="nav-link fw-bold" href="{% url 'logout' %}">LOG OUT</a>
+                  </li>
+                  {% else %}
                   <li class="nav-item">
                     <a class="nav-link fw-bold" href="{% url 'login' %}">LOG IN</a>
                   </li>
+                  {% endif %}
                   <li class="nav-item">
                     <a class="nav-link fw-bold" href="#">QUERIES</a>
                   </li>
