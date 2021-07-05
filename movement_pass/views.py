@@ -4,6 +4,7 @@ from .models import District, Gender, IdType, Registration
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from .forms import ApplyPassForm
 # Create your views here.
 
 def home(request):  
@@ -70,3 +71,14 @@ class RegistrationView(View):
             messages.error(request, phone+" Already Exist.")
             return redirect('registration')             
         return redirect('home')
+
+class ApplyPassView(View):
+    def get(self, request):
+        # forms = ApplyPassForm()
+        # context = {
+        #     'forms':forms
+        # }
+        return render(request, 'core/apply_pass.html')
+    
+    def post(self, request):
+        return render(request, 'core/apply_pass.html')

@@ -1,6 +1,7 @@
 from django import forms
-from django.contrib.model import User
+from .models import Apply_Pass
 
-class UserLoginForm(forms.Form):
-    username = forms.CharField(widget=(forms.TextInput(attrs={'class':'form-control'})))
-    password = forms.PasswordField(widget=(forms.PasswordInput(attrs={'class':'form-control'})))
+class ApplyPassForm(forms.ModelForm):
+    class Meta:
+        model = Apply_Pass
+        exclude = ['passuser', ]
