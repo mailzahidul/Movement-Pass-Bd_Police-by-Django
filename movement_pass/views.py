@@ -4,7 +4,9 @@ from .models import District, Gender, IdType, Registration
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import ApplyPassForm
+from .forms import Apply_PassForm
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 # Create your views here.
 
 def home(request):  
@@ -18,10 +20,12 @@ def userlogin(request):
         user = authenticate(username=phone, password=date_of_birth)
         if user is not None:
             login(request, user)
-            messages.success(request, "Login Success")
+            if 'next' in request.POST:
+                return redirect(request.POST.get('next'))
+                messages.success(request, "Login Success")
             return redirect('home')
         else:
-            messages.danger(request, "Phone or Date of Birth invalid")
+            messages.error(request, "Phone or Date of Birth invalid")
     return render(request, 'core/login.html')
 
 def userlogout(request):
@@ -72,13 +76,24 @@ class RegistrationView(View):
             return redirect('registration')             
         return redirect('home')
 
+@method_decorator(login_required, name='dispatch')
 class ApplyPassView(View):
     def get(self, request):
-        # forms = ApplyPassForm()
-        # context = {
-        #     'forms':forms
-        # }
-        return render(request, 'core/apply_pass.html')
+        forms = Apply_PassForm()
+        context = {
+            'forms':forms
+        }
+        return render(request, 'core/apply_pass.html', context)
     
     def post(self, request):
+        forms = Apply_PassForm(request.POST)
+        username = request.user
+        if forms.is_valid():
+            obj = forms.save(commit=False)
+            obj.passuser=username
+            obj.save()
+            messages.success(request, "Apply for pass success")
+            return redirect('home')
+        else:
+            messages.error(request, "Invalid Value")
         return render(request, 'core/apply_pass.html')

@@ -46,7 +46,9 @@
                                 <input id="password"  placeholder="" type="date" class="form-control " name="date_of_birth" required autocomplete="off">
                         </div>
                         <p class="small text-muted">If the date is 01-02-1994 then write 02/01/1994</p>
-
+                        {% if request.GET.next %}
+                            <input type="hidden" name="next" value="{{request.GET.next}}" >
+                        {% endif %}
                         <div class="form-group mt-3">
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary w-100">Log In</button>

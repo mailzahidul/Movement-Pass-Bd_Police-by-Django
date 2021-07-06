@@ -79,8 +79,8 @@ class Apply_Pass(models.Model):
     applied_date = models.DateField(auto_now=True)
     is_approved = models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.passuser.registration.name
+    # def __str__(self):
+    #     return self.passuser.registration.name
 
 
     def save(self, *args, **kwargs):
@@ -93,15 +93,3 @@ class Apply_Pass(models.Model):
         self.qr_image.save(fname, File(buffer), save=False)
         canvas.close()
         super().save(*args, **kwargs)
-
-    # def save(self,*args,**kwargs):
-    #     qrcode_img = qrcode.make(self.id)
-    #     canvas = Image.new('RGB',(290, 290),'white')
-    #     draw = ImageDraw.Draw(canvas)
-    #     canvas.paste(qrcode_img)
-    #     frame = f'qr_code-{self.id}.png'
-    #     buffer = BytesIO()
-    #     canvas.save(buffer,'PNG')
-    #     self.qr_image.save(frame, File(buffer), save=False)
-    #     canvas.close()
-    #     super().save(*args,**kwargs)
