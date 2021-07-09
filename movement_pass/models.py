@@ -78,6 +78,7 @@ class Apply_Pass(models.Model):
     movement_reason = models.ForeignKey(MovementReason, on_delete=models.SET_NULL, null=True)
     applied_date = models.DateField(auto_now=True)
     is_approved = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     # def __str__(self):
     #     return self.passuser.registration.name

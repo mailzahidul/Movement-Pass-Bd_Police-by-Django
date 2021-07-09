@@ -1,0 +1,49 @@
+{% extends 'pages/base.html' %}
+
+{% block title %} Apply Pass List | Movement Pass {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-10">
+            <h3>Your Movement Pass</h3>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'apply_pass' %}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> New Pass</a>
+        </div>
+        <table class="table mt-4">
+            <thead>
+              <tr>
+                <th scope="col">SL.</th>
+                <th scope="col">Location From</th>
+                <th scope="col">Where to go</th>
+                <th scope="col">Tracking No.</th>
+                <th scope="col">Time</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for obj in objs %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ obj.location_from|capfirst }}</td>
+                <td>{{ obj.where_to|capfirst }}</td>
+                <td>{{ obj.id }}</td>
+                <td>{{ obj.time_limit }} hours</td>
+                {% if obj.is_active == True %}
+                    <td><a href="" class="btn btn-success"><i class="fas fa-hand-peace"></i> Active</a></td>
+                {% else %}
+                    <td><a href="" class="btn btn-danger"><i class="fas fa-exclamation-circle"></i> Expired</a></td>
+                {% endif %}
+
+                {% if obj.is_approved == True %}
+                    <td><a href="{% url 'apply_pass_download_page' %}" class="btn btn-success"><i class="fas fa-eye"></i> View</a></td>
+                {% else %}
+                    <td><a href="" class="btn btn-danger"><i class="fas fa-exclamation-circle"></i> Not Approved</a></td>
+                {% endif %}
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+{% endblock %}

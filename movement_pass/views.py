@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import District, Gender, IdType, Registration
+from .models import District, Gender, IdType, Registration, Apply_Pass
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -97,3 +97,25 @@ class ApplyPassView(View):
         else:
             messages.error(request, "Invalid Value")
         return render(request, 'core/apply_pass.html')
+
+
+class ApplyPassList(View):
+    def get(self, request):
+        username = request.user
+        obj = Apply_Pass.objects.filter(passuser=username)
+        context = {
+            'objs' : obj
+        }
+        return render(request, 'core/apply_pass_list.html', context)
+
+def apply_pass_download_page(request):
+    username = request.user
+    obj = Apply_Pass.objects.get(passuser=username)
+    print(obj.passuser.registration)
+    # print(obj.passuser.__registration,"Check")
+    # obj = Registration.objects.get(user=username)
+    print(obj, "MINA")
+    context = {
+        'objs' : obj
+    }
+    return render(request, 'core/apply_pass download_page.html', context)
