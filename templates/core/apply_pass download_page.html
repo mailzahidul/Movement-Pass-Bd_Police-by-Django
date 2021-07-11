@@ -143,7 +143,8 @@
         </div>
         </div>
         <div class="card-footer text-center">
-            <button class="btn btn-primary btn-md clearfix hidden-print" id="download"> Download Pass</button>
+            <!-- <button class="btn btn-primary btn-md clearfix hidden-print" id="download"> Download Pass</button> -->
+            <a class="btn btn-primary btn-md clearfix hidden-print" href="{% url 'create_pdf' %}" >Download Pass</a>
             
         </div>
         <div id="previewImage" style="display: none">

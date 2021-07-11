@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.http import HttpResponse
 from .models import District, Gender, IdType, Registration, Apply_Pass
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -7,6 +8,9 @@ from django.contrib import messages
 from .forms import Apply_PassForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 # Create your views here.
 
 def home(request):  
@@ -111,11 +115,32 @@ class ApplyPassList(View):
 def apply_pass_download_page(request):
     username = request.user
     obj = Apply_Pass.objects.get(passuser=username)
-    print(obj.passuser.registration)
-    # print(obj.passuser.__registration,"Check")
-    # obj = Registration.objects.get(user=username)
-    print(obj, "MINA")
     context = {
         'objs' : obj
     }
     return render(request, 'core/apply_pass download_page.html', context)
+
+
+def create_pdf(request):
+    username = request.user
+    obj = Apply_Pass.objects.get(passuser=username)
+
+    template_path = 'core/download-page.html'
+    context = {'objs' : obj}
+    respons = HttpResponse(content_type='application/pdf')
+    respons['Content-Disposition']='filename="report.pdf"'
+
+
+    template = get_template(template_path)
+    html = template.render(context)
+
+    pisa_status = pisa.CreatePDF(html, dest=respons)
+ 
+    if pisa_status.err:
+        return HttpResponse('we had some errors <pre>'+html+'</pre>')
+    return respons
+
+
+def dashboard_view(request):
+
+    return render(request, 'admina/dashboard.html')

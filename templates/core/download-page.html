@@ -1,0 +1,85 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+<table class="table table-bordered text-center mb-0">
+
+    <tbody id="table" class="bg-white">
+
+        <tr>
+            <th colspan="2" rowspan="4">
+
+                <a href="javascript:void(0)">
+                    <img height="150px" width="130px" class="image_custom"
+                        src="{{ objs.passuser.registration.photo.path }}">
+                </a>
+                <br>
+                <b><span class="text-muted">NAME:</span> {{objs.passuser.registration.name}}</b>
+                <br>
+                <span class="text-muted">Date of Birth : </span> {{ objs.passuser.registration.date_of_birth }}
+                <br>
+                <span class="text-muted">ID NUMBER:</span> {{objs.passuser.registration.id_number }}
+                <br>
+                <span class="text-muted">MOBILE NO:</span> {{ objs.passuser.registration.user }}
+            </th>
+            <th colspan="2">
+                <b> You Took Movement Pass 1 times</b>
+            </th>
+        </tr>
+        <tr>
+            <th colspan="4"><span class="text-muted">Reason for the pass</span><br> <b>{{objs.movement_reason }}</b>
+            </th>
+        </tr>
+        <tr>
+            <th colspan="4">
+                <span class="text-muted">Time allowed for movement</span>
+                <br>
+                <b class="traveltime">
+                    {{ objs.time_limit }} hours
+                </b>
+                <br>
+            </th>
+        </tr>
+        <tr>
+        </tr>
+
+        <tr>
+        </tr>
+        <tr>
+            <th colspan="4"><span class="text-muted">Date and Time</span> <br> <b> {{ objs.journey_date }}</b></th>
+        </tr>
+        <tr>
+            <th colspan="4:" rowspan="2">{{ objs.location_from|capfirst }}<br />to<br />{{ objs.where_to|capfirst}}
+                <br />{% if objs.move == 'Only Go' %}(One Way){% else %} ( Round Trip ){% endif %}</th>
+        </tr>
+        <tr>
+        </tr>
+        <tr>
+            <th colspan="4">
+                <span class="text-muted">Tracking no.</span><br><b>{{objs.id}}</b>
+                <br>
+                <img src="{{ objs.qr_image.url }}" alt="QR code">
+            </th>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="row no-gutters">
+                            <div class="col-sm-1">
+                                <img src="{{ objs.qr_image.path }}" style="height: 50px;width: 50px;objsect-fit: contain"
+                                    alt="">
+                            </div>
+                            <div class="col-sm-11">
+                                <span class="text-danger"><strong>The pass will be considered invalid if you do not
+                                        carry the identity card and mobile number provided in the form along with the
+                                        issued pass during the trip.</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

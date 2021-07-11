@@ -8,5 +8,7 @@ urlpatterns = [
     path('registration/', views.RegistrationView.as_view(), name='registration'),
     path('apply_pass/', views.ApplyPassView.as_view(), name='apply_pass'),
     path('apply_pass_list/', views.ApplyPassList.as_view(), name='apply_pass_list'),
+    path('admin/dashboard', views.dashboard_view, name='dashboard'),
     path('apply_pass_download_page/', views.apply_pass_download_page, name='apply_pass_download_page'),
+    path('create_pdf/', views.create_pdf, name='create_pdf'),
 ]
