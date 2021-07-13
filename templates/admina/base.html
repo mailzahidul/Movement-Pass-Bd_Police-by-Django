@@ -63,8 +63,8 @@
 
 
             <!-- {% url 'dashboard' as url %} -->
-            <li class="nav-item {% if request.path == url %} active {% endif %}">
-                <a class="nav-link" href="#">
+            <li class="nav-item {% if request.path == 'dashboard' %} active {% endif %}">
+                <a class="nav-link" href="{% url 'dashboard' %}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -123,7 +123,7 @@
 
             <!-- {% url 'time' as url %} -->
             <li class="nav-item {% if request.path == url %} active {% endif %}">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{% url 'timelimit' %}">
                     <i class="far fa-clock"></i>
                     <span>Time spends</span></a>
             </li>
@@ -217,15 +217,15 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ user.passuser.name}}</span>
-                                {% if user.passuser.image %}
-                                <img class="img-profile rounded-circle" src="{{ user.passuser.image.url }}">
+                                {% if user.registration.photo %}
+                                <img class="img-profile rounded-circle" src="{{ user.registration.photo.url }}">
                                 {% else %}
                                 <img class="img-profile rounded-circle"
                                     src="https://www.pngarts.com/files/11/Avatar-PNG-Transparent-Image.png" alt="">
                                 {% endif %}
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            <div class="dropdown-menu dropdown-menu-right shadow animated-grow-in"
                                 aria-labelledby="userDropdown">
 
                                 <a class="dropdown-item" href="{% url 'logout' %}" data-toggle="modal"
@@ -303,22 +303,22 @@
         {% block script %} {% endblock %}
 
         <!-- Bootstrap core JavaScript-->
-        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-        <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'jfs/jquery.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 
         <!-- Core plugin JavaScript-->
-        <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+        <script src="{% static 'js/jquery.easing.min.js' %}"></script>
 
         <!-- Custom scripts for all pages-->
         <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
 
 
         <!-- Page level plugins -->
-        <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
-        <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+        <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
 
         <!-- Page level custom scripts -->
-        <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+        <script src="{% static 'js/datatables-demo.js' %}"></script>
 
 </body>
 

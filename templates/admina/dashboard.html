@@ -22,7 +22,7 @@ border-left:.25rem solid #55E6C1 !important;
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                             Total Users </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800"> {{ total_user }}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"> {{ total_registered_user.count }}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-users fa-2x text-blue-300" style="color:blue"></i>
@@ -40,7 +40,7 @@ border-left:.25rem solid #55E6C1 !important;
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                             Total Movement Pass</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_pass }}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_movement_pass }}</div>
                     </div>
                     <div class="col-auto">
 
@@ -59,7 +59,7 @@ border-left:.25rem solid #55E6C1 !important;
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                             Total Approved Pass </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ approved }}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_movement_approved }}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-thumbs-up fa-2x text-info"></i>
@@ -77,7 +77,7 @@ border-left:.25rem solid #55E6C1 !important;
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                             New Pending Pass </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ pending }}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_movement_pending }}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-thumbs-down fa-2x text-warning"></i>
@@ -95,7 +95,7 @@ border-left:.25rem solid #55E6C1 !important;
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                             New Expired Pass</div>
-                        <div class="h5 mb-0 font-weight-bold text-red-800">{{ total_expired }}</div>
+                        <div class="h5 mb-0 font-weight-bold text-red-800">{{ total_movement_expire }}</div>
                     </div>
                     <div class="col-auto">
 
@@ -115,7 +115,7 @@ border-left:.25rem solid #55E6C1 !important;
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold  text-uppercase mb-1" style="color:#0a3d62;">
                             Mevement Reasons </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_reason }}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ movement_reason }}</div>
                     </div>
                     <div class="col-auto">
 
@@ -135,7 +135,7 @@ border-left:.25rem solid #55E6C1 !important;
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold  text-uppercase mb-1" style="color:#9b59b6;">
                             Total District</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ district }}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_district }}</div>
                     </div>
                     <div class="col-auto">
 
@@ -155,7 +155,7 @@ border-left:.25rem solid #55E6C1 !important;
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold  text-uppercase mb-1" style="color:#55E6C1">
                             Time Hours</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ time }}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ timelimit }}</div>
                     </div>
                     <div class="col-auto">
 
@@ -186,14 +186,14 @@ border-left:.25rem solid #55E6C1 !important;
                             <th> Name</th>
                         </thead>
                         <tbody>
-                            <!-- {% for r in recent_users %} -->
+                            {% for r in recent_registered %}
                             <tr>
                                 <td>{{ forloop.counter }}</td>
                                 <td> {{ r.created_at }}</td>
-                                <td> {{ r.name }} | <a href="#"> <i class="fa fa-eye"></i>
+                                <td> {{ r.name }} | <a href="#" class="float-right"> <i class="fa fa-eye"></i>
                                     </a></td>
                             </tr>
-                            <!-- {% endfor %} -->
+                            {% endfor %}
                         </tbody>
 
 
@@ -220,17 +220,17 @@ border-left:.25rem solid #55E6C1 !important;
                             <th> Status </th>
                         </thead>
                         <tbody>
-                            <!-- {% for r in recent_pass %} -->
+                            {% for r in new_applied_movement_pass_user %}
                             <tr>
 
                                 <td><a href="#">{{ r.id }}</a> </td>
-                                <!-- {% if r.is_approved == True %} -->
-                                <td> Approved</td>
-                                <!-- {% else %} -->
-                                <td>Pending</td>
-                                <!-- {% endif %} -->
+                                {% if r.is_approved == True %}
+                                <td> <button class="btn btn-success">Approved</button></td>
+                                {% else %}
+                                <td> <button class="btn btn-warning">Approved</button></td>
+                                {% endif %}
                             </tr>
-                            <!-- {% endfor %} -->
+                            {% endfor %}
                         </tbody>
                     </table>
                     <a href="#" class="btn btn-dark btn-sm btn-block"> View All Movement Pass </a>

@@ -79,6 +79,7 @@ class Apply_Pass(models.Model):
     applied_date = models.DateField(auto_now=True)
     is_approved = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    is_expire = models.BooleanField(default=False)
 
     # def __str__(self):
     #     return self.passuser.registration.name

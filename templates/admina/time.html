@@ -1,0 +1,75 @@
+{% extends 'admina/base.html' %}
+{% block title %} Movement Reason | Movement Pass BD {% endblock %}
+{% block content %}
+
+<div class="container-fluid">
+
+    {% if messages %}
+    <div class="messages" style="width: 60%; margin: 0 auto;" >
+        {% for message in messages %}
+            <div class="alert alert-primary" {% if message.tags %}
+                 class="{{ message.tags }}"{% endif %}>{{ message }}
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+    
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="card shadow mb-4 py-3 " >
+        <form action="{% url 'timelimit' %}" method="POST" class="align-items-center">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-8 p-3">
+                    <input type="text"  style="width:85%; float: right;" name="time" id="" class="form-control" placeholder="Add Time Hours" required>
+                </div>
+            
+            <div class="col-4 p-3">
+                <button class="btn  btn-primary" type="submit"> Add Time Set</button>
+            </div>
+        </div> 
+        </form>
+    </div>
+
+
+    <div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered"  width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th> SL </th>
+                        <th>Time Hours</th>
+                        <th> Delete </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                   {% for r in timelimit %}
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                        <td>{{ r }} Hours</td>
+                        <td>
+                            <div>
+                                <a href="{% url 'delete_time' r.id %}" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</a>
+                            </div>
+                            
+                    
+                        </td>
+                    <tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+          </div> 
+    </div> 
+</div>
+
+
+
+</div>
+
+
+
+{% endblock %}

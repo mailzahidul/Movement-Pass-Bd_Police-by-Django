@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
-from .models import District, Gender, IdType, Registration, Apply_Pass
+from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -142,5 +142,48 @@ def create_pdf(request):
 
 
 def dashboard_view(request):
+    total_registered_user = Registration.objects.all()
+    new_applied_movement_pass_user = Apply_Pass.objects.order_by('-id')[:5]
+    recent_registered = Registration.objects.order_by('-created_at')[:5]
+    total_movement_pass = Apply_Pass.objects.all().count()
+    total_movement_approved = Apply_Pass.objects.filter(is_approved=True).count()
+    total_movement_pending = Apply_Pass.objects.filter(is_approved=False).count()
+    total_movement_expire = Apply_Pass.objects.filter(is_expire=True).count()
+    movement_reason = MovementReason.objects.all().count()
+    total_district = District.objects.all().count()
+    timelimit = TimeLimit.objects.all().count()
 
-    return render(request, 'admina/dashboard.html')
+    context={
+        'total_registered_user':total_registered_user,
+        'recent_registered':recent_registered,
+        'new_applied_movement_pass_user':new_applied_movement_pass_user,
+        'total_movement_pass':total_movement_pass,
+        'total_movement_approved':total_movement_approved,
+        'total_movement_pending':total_movement_pending,
+        'total_movement_expire':total_movement_expire,
+        'movement_reason':movement_reason,
+        'total_district':total_district,
+        'timelimit':timelimit
+    }
+
+    return render(request, 'admina/dashboard.html', context)
+
+
+class TimeLimitView(View):
+    def get(self, request):
+        timelimit = TimeLimit.objects.all()
+        context = {
+            'timelimit':timelimit
+        }
+        return render(request, 'admina/time.html', context)
+    
+    def post(self, request):
+        time = request.POST['time']
+        obj = TimeLimit.objects.create(time_limit=time)
+        obj.save()
+        return redirect('timelimit')
+
+def delete_time(request, pk):
+    obj = TimeLimit.objects.get(id=pk)
+    obj.delete()
+    return redirect('timelimit')
