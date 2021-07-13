@@ -8,7 +8,7 @@ from django.contrib import messages
 from .forms import Apply_PassForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-
+from django.db.models import Q
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 # Create your views here.
@@ -187,3 +187,33 @@ def delete_time(request, pk):
     obj = TimeLimit.objects.get(id=pk)
     obj.delete()
     return redirect('timelimit')
+
+
+def all_movement_pass(request):
+    all_pass = Apply_Pass.objects.all()
+    context = {
+        'all_pass': all_pass
+    }
+    return render(request, 'admina/all_movement_pass.html', context)
+
+
+class SearchView(View):
+    def get(self, request):
+        search = request.GET.get('searched_item', None)
+        obj = Apply_Pass.objects.all()
+        if len(search)> 100 :
+            obj_pass = obj.none()
+        else:
+            obj_pass = obj.filter(
+                Q(passuser__registration__name__icontains = search) |
+                Q(location_from__icontains = search) |
+                Q(where_to__icontains = search) |
+                Q(district__icontains = search) |
+                Q(thana__icontains = search)
+            )
+        context ={
+            'obj_pass':obj_pass,
+            'search':search
+        }
+        
+        return render(request, 'admina/search.html', context)

@@ -1,0 +1,52 @@
+{% extends 'admina/base.html' %}
+{% block title %} Search : {{ search }} | Movement Pass BD{% endblock %}
+{% block content %}
+
+{% if obj_pass %}
+<div class="row">
+    {% for p in obj_pass %}
+    
+    <div class="col-6 mb-4">
+        <div class="card shadow"  style="padding: 15px;">
+        <table >
+            <tr>
+                <td> ID </td>
+                <td> : </td>
+                <td>{{ p.id }}</td>
+            </tr>
+            <tr>
+                <td> Name </td>
+                <td> : </td>
+                <td> {{ p.passuser.registration.name }}</td>
+            </tr>
+            <tr>
+                <td>From : {{ p.location_from }}</td>
+                <td> | </td>
+                <td> To : {{ p.where_to }}</td>
+            </tr>
+            <tr>
+                <td> Time Spending</td>
+                <td> : </td>
+                <td> {{ p.timelimit }}</td>
+            </tr>
+        </table>
+        <a href="#" class="btn btn-sm bg-gray-300"> View <i class="fa fa-eye"></i></a>        
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="col-lg-10 " style="margin:0 auto;">
+ <h3>Your search - <b>{{ search }}</b> - did not match any of the documents.</h3> 
+
+<h5> Suggestions: </h5>
+<ul>
+<li>  Make sure that all words are spelled correctly.</li>
+<li>  Try different keywords.</li>
+<li>  Try more general keywords.</li>
+<li>  Try fewer keywords.</li>
+</ul>
+
+</div>
+{% endif %}
+{% endblock %}

@@ -81,8 +81,8 @@ class Apply_Pass(models.Model):
     is_active = models.BooleanField(default=True)
     is_expire = models.BooleanField(default=False)
 
-    # def __str__(self):
-    #     return self.passuser.registration.name
+    def __str__(self):
+        return self.passuser.registration.name
 
 
     def save(self, *args, **kwargs):

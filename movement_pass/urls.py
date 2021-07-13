@@ -11,6 +11,8 @@ urlpatterns = [
     path('admin/dashboard', views.dashboard_view, name='dashboard'),
     path('admin/timelimit_view', views.TimeLimitView.as_view(), name='timelimit'),
     path('admin/delete_time/<int:pk>', views.delete_time, name='delete_time'),
+    path('admin/all_movement_pass', views.all_movement_pass, name='all_pass'),
+    path('admin/search_item', views.SearchView.as_view(), name='search_item'),
     path('apply_pass_download_page/', views.apply_pass_download_page, name='apply_pass_download_page'),
     path('create_pdf/', views.create_pdf, name='create_pdf'),
 ]
