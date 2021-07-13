@@ -10,6 +10,13 @@
 
 ![registration](https://user-images.githubusercontent.com/20764328/124392751-1ddee580-dd19-11eb-8d3e-dfc22a3aa22b.PNG)
 
+# All Applied for Movement Pass
+
+![alluserpass](https://user-images.githubusercontent.com/20764328/125390663-0fea2e00-e3c5-11eb-840b-1f317598f29c.PNG)
+
+# Backend
+
+![backend](https://user-images.githubusercontent.com/20764328/125390623-01037b80-e3c5-11eb-85ab-b6d765033076.PNG)
 
 # Tools
 1. Bootstrap 5
